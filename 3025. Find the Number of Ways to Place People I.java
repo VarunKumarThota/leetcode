@@ -1,3 +1,31 @@
+// 1. using sorting on x - co-ordinate and then looping over for the count.
+class Solution {
+    public int numberOfPairs(int[][] points) {
+        int n = points.length;
+        int totalPairs = 0;
+        Arrays.sort(points,(a,b) -> {
+            if(a[0] == b[0]) return Integer.compare(b[1],a[1]);
+            return Integer.compare(a[0],b[0]);
+        });
+
+        for(int i = 0;i < n - 1;i++){
+            int y1 = points[i][1];
+            int middle = Integer.MIN_VALUE;
+            for(int j = i + 1;j < n;j++){
+                int y2 = points[j][1];
+                if(y2 <= y1){
+                    if(middle <= y1 && middle >= y2) continue;
+                    totalPairs++;
+                    middle = y2;
+                }
+            }
+        }
+        return totalPairs;
+    }
+}
+
+
+// 2. Without Sorting and using 2 loops
 class Solution {
     public int numberOfPairs(int[][] points) {
         int n = points.length;
